@@ -1,29 +1,34 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { getImagesByQuery } from './js/pixabay-api';
-import { createGallery, hideLoader, showLoader } from './js/render-functions';
+import {
+  clearGallery,
+  createGallery,
+  hideLoader,
+  showLoader,
+} from './js/render-functions';
 // Описаний в документації
 import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const lightbox = new SimpleLightbox('a', {
-  nav: true,
-  captions: true,
-  captionsData: 'data',
-  captionsPosition: 'bottom',
-  captionType: 'attr',
-  sourceAttr: 'href',
-  overlay: true,
-  captionSelector: 'img',
-  captionDelay: 250,
-}); //problem
+// const lightbox = new SimpleLightbox('a', {
+//   nav: true,
+//   captions: true,
+//   captionsData: 'data',
+//   captionsPosition: 'bottom',
+//   captionType: 'attr',
+//   sourceAttr: 'href',
+//   overlay: true,
+//   captionSelector: 'img',
+//   captionDelay: 250,
+// }); //problem
 
 //listener
 const form = document.querySelector('form');
 form.addEventListener('submit', e => {
   e.preventDefault();
-  document.querySelector('ul.gallery').innerHTML = '';
+  clearGallery();
   showLoader();
   if (
     document
@@ -38,12 +43,13 @@ form.addEventListener('submit', e => {
         .trim()
       //if don't error
     )
-      .then(response => {
+      .then(hits => {
+        console.log(hits);
         hideLoader();
         // const obj = JSON.parse(data);
         if (
           //obj.length
-          response.data.hits.length === 0
+          hits.length === 0
         ) {
           iziToast.error({
             message:
@@ -52,7 +58,7 @@ form.addEventListener('submit', e => {
             backgroundColor: ' #ef4040;',
           });
         }
-        return response; //obj
+        return hits; //obj
       })
       .catch(error => {
         iziToast.error({
@@ -62,10 +68,11 @@ form.addEventListener('submit', e => {
         });
         hideLoader();
       })
-      .then(responseAxios => {
+      .then(hits => {
+        console.log(hits);
         // hideLoader();
-        createGallery(responseAxios.data.hits);
-        lightbox.refresh();
+        createGallery(hits);
+        // lightbox.refresh();
       });
   } else {
     return iziToast.error({

@@ -4,13 +4,25 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export function createGallery(images) {
+  const lightbox = new SimpleLightbox('a', {
+    nav: true,
+    captions: true,
+    captionsData: 'attr',
+    captionsPosition: 'bottom',
+    captionType: 'attr',
+    sourceAttr: 'href',
+    overlay: true,
+    captionSelector: 'img',
+    captionDelay: 250,
+  }); //problem
   //ul-(for-li-img)-insertAdj(ul)
+  console.log(images);
   const galleryMarkup = images.map(element => {
     return `<li class="item-gallery">
                 <a href="${element.largeImageURL}" class="a-item">
                   <img
                     class="img-gallery"
-                    src="${element.webformatURL}" likes='${element.likes}' view='${element.views}' comments='${element.comments}' downloads='${element.downloads}' data-source="${element.largeImageURL} alt=${element.tags}"
+                    src="${element.webformatURL}" data-likes='${element.likes}' data-view='${element.views}' data-comments='${element.comments}' data-downloads='${element.downloads}' data-source="${element.largeImageURL}" alt="${element.tags}"
                   />
                 </a>
                 <ul class='info'>
@@ -24,21 +36,22 @@ export function createGallery(images) {
 
   const galleryUl = document.querySelector('ul.gallery');
   galleryUl.insertAdjacentHTML('afterbegin', galleryMarkup.join(''));
+  console.log(galleryMarkup);
   //simplelightb =new spml('a.gal', {})  simpleLightb.refresh();
+  lightbox.refresh();
 }
 export function clearGallery() {
-  const galleryUl = document
-    .querySelector('ul.gallery')
-    .insertAdjacentHTML('afterbegin', '');
+  const galleryUl = document.querySelector('ul.gallery');
+  galleryUl.innerHTML = '';
 }
 export function showLoader() {
   // document
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
-  document.querySelector('span').classList.add('showLoader');
+  document.querySelector('span.loader').classList.add('showLoader');
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
-  document.querySelector('span').classList.remove('showLoader');
+  document.querySelector('span.loader').classList.remove('showLoader');
 }
 //splghtbx
