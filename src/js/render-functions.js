@@ -6,7 +6,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 export const lightbox = new SimpleLightbox('.a-item', {
   nav: true,
   captions: true,
-  captionsData: 'attr',
+  captionsData: 'alt',
   captionsPosition: 'bottom',
   captionType: 'attr',
   sourceAttr: 'href',
@@ -46,19 +46,17 @@ export function clearGallery() {
   const galleryUl = document.querySelector('ul.gallery');
   galleryUl.innerHTML = '';
 }
-const span = document.querySelector('span.loader');
+
 export function showLoader() {
   // document
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
-  if (span != 0) {
-    span.classList.add('showLoader');
-  }
+  const span = document.querySelector('span.loader');
+  span.classList.add('showLoader');
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
-  if (span != 0) {
-    span.classList.remove('showLoader');
-  }
+  const span = document.querySelector('span.loader');
+  span.classList.remove('showLoader');
 }
 //splghtbx

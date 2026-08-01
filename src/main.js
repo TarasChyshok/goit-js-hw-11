@@ -8,9 +8,7 @@ import {
   showLoader,
 } from './js/render-functions';
 // Описаний в документації
-import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import { lightbox } from './js/render-functions';
 // const lightbox = new SimpleLightbox('a', {
 //   nav: true,
@@ -45,7 +43,6 @@ form.addEventListener('submit', e => {
     )
       .then(hits => {
         console.log(hits);
-        hideLoader();
         // const obj = JSON.parse(data);
         if (
           //obj.length
@@ -57,6 +54,7 @@ form.addEventListener('submit', e => {
             position: 'topRight',
             backgroundColor: ' #ef4040;',
           });
+          hideLoader();
         }
         return hits; //obj
       })
@@ -70,6 +68,7 @@ form.addEventListener('submit', e => {
       })
       .then(hits => {
         console.log(hits);
+        hideLoader();
         // hideLoader();
         createGallery(hits);
         // lightbox.refresh();
@@ -80,5 +79,6 @@ form.addEventListener('submit', e => {
       position: 'topRight',
       backgroundColor: ' #ef4040;',
     });
+    hideLoader();
   }
 });
