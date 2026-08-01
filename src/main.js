@@ -23,6 +23,7 @@ const lightbox = new SimpleLightbox('a', {
 const form = document.querySelector('form');
 form.addEventListener('submit', e => {
   e.preventDefault();
+  document.querySelector('ul.gallery').innerHTML = '';
   showLoader();
   if (
     document
@@ -38,7 +39,6 @@ form.addEventListener('submit', e => {
       //if don't error
     )
       .then(response => {
-        console.log(response);
         hideLoader();
         // const obj = JSON.parse(data);
         if (
@@ -51,17 +51,15 @@ form.addEventListener('submit', e => {
             position: 'topRight',
             backgroundColor: ' #ef4040;',
           });
-        } else {
-          iziToast.error({
-            message: `Sorry, here ${error}!`,
-            position: 'topRight',
-            backgroundColor: ' #ef4040;',
-          });
         }
         return response; //obj
       })
       .catch(error => {
-        console.log(error);
+        iziToast.error({
+          message: `Sorry, here ${error}!`,
+          position: 'topRight',
+          backgroundColor: ' #ef4040;',
+        });
         hideLoader();
       })
       .then(responseAxios => {
