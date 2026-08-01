@@ -9,7 +9,6 @@ import {
 } from './js/render-functions';
 // Описаний в документації
 // Додатковий імпорт стилів
-import { lightbox } from './js/render-functions';
 // const lightbox = new SimpleLightbox('a', {
 //   nav: true,
 //   captions: true,
@@ -42,35 +41,38 @@ form.addEventListener('submit', e => {
       //if don't error
     )
       .then(hits => {
-        hideLoader();
-
-        if (hits.length === 0) {
-          iziToast.error({
+        showLoader();
+        if (
+          document.querySelector("input[name='search-text']").value.trim() ===
+          ''
+        ) {
+          return iziToast.error({
+            message: 'Sorry, input is empty!',
+            position: 'topRight',
+            backgroundColor: ' #ef4040;',
+          });
+        } else if (hits.length === 0) {
+          return iziToast.error({
             message:
               'Sorry, there are no images matching your search query. Please try again!',
             position: 'topRight',
             backgroundColor: ' #ef4040;',
           });
-        } else if (
-          document.querySelector("input[name='search-text']").value !== ''
-        ) {
-          iziToast.error({
-            message: 'Sorry, input is empty!',
-            position: 'topRight',
-            backgroundColor: ' #ef4040;',
-          });
         } else {
           // hideLoader();
-          createGallery(hits);
+          return createGallery(hits);
           // lightbox.refresh();}
         }
       })
       .catch(error => {
-        iziToast.error({
+        return iziToast.error({
           message: `Sorry, here ${error}!`,
           position: 'topRight',
           backgroundColor: ' #ef4040;',
         });
+      })
+      .finally(() => {
+        hideLoader();
       });
   }
 });

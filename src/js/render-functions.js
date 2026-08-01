@@ -3,7 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export const lightbox = new SimpleLightbox('a.a-item', {
+export const lightbox = new SimpleLightbox('ul.gallery a.a-item', {
   nav: true,
   captions: true,
   captionsData: 'alt',
@@ -51,9 +51,8 @@ export function showLoader() {
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
   const span = document.querySelector('span.loader');
   if (!span) {
-    span = document.createElement('span');
-    span.classList.add('loader');
-    document.querySelector('form').insertAdjacentHTML('afterend', span);
+    spanCrEl = "<span class='loader'></span>";
+    document.querySelector('form').insertAdjacentHTML('afterend', spanCrEl);
   }
   span.classList.add('showLoader');
 }
