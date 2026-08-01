@@ -41,25 +41,26 @@ export function createGallery(images) {
   lightbox.refresh();
 }
 export function clearGallery() {
-  const galleryUl = document.querySelector('ul.gallery');
-  galleryUl.innerHTML = '';
+  if (document.querySelector('ul.gallery')) {
+    const galleryUl = document.querySelector('ul.gallery');
+    galleryUl.innerHTML = '';
+  }
 }
 
 export function showLoader() {
   // document
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
-  const span = document.querySelector('span.loader');
   if (!span) {
-    spanCrEl = "<span class='loader'></span>";
+    let spanCrEl = "<span class='loader'></span>";
     document.querySelector('form').insertAdjacentHTML('afterend', spanCrEl);
   }
-  span.classList.add('showLoader');
+  const span = document.querySelector('span.loader');
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
-  const span = document.querySelector('span.loader');
   if (span) {
+    const span = document.querySelector('span.loader');
     span.classList.remove('showLoader');
   }
 }
