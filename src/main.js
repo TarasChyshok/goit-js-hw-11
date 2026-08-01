@@ -11,7 +11,7 @@ import {
 import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
+import { lightbox } from './js/render-functions';
 // const lightbox = new SimpleLightbox('a', {
 //   nav: true,
 //   captions: true,

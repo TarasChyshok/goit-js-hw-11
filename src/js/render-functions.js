@@ -3,18 +3,20 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+export const lightbox = new SimpleLightbox('.a-item', {
+  nav: true,
+  captions: true,
+  captionsData: 'attr',
+  captionsPosition: 'bottom',
+  captionType: 'attr',
+  sourceAttr: 'href',
+  overlay: true,
+  captionSelector: 'img',
+  captionDelay: 250,
+});
+
 export function createGallery(images) {
-  const lightbox = new SimpleLightbox('a', {
-    nav: true,
-    captions: true,
-    captionsData: 'attr',
-    captionsPosition: 'bottom',
-    captionType: 'attr',
-    sourceAttr: 'href',
-    overlay: true,
-    captionSelector: 'img',
-    captionDelay: 250,
-  }); //problem
+  //problem
   //ul-(for-li-img)-insertAdj(ul)
   console.log(images);
   const galleryMarkup = images.map(element => {
@@ -44,14 +46,19 @@ export function clearGallery() {
   const galleryUl = document.querySelector('ul.gallery');
   galleryUl.innerHTML = '';
 }
+const span = document.querySelector('span.loader');
 export function showLoader() {
   // document
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
-  document.querySelector('span.loader').classList.add('showLoader');
+  if (span != 0) {
+    span.classList.add('showLoader');
+  }
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
-  document.querySelector('span.loader').classList.remove('showLoader');
+  if (span != 0) {
+    span.classList.remove('showLoader');
+  }
 }
 //splghtbx
