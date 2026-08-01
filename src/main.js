@@ -42,21 +42,28 @@ form.addEventListener('submit', e => {
       //if don't error
     )
       .then(hits => {
-        console.log(hits);
-        // const obj = JSON.parse(data);
-        if (
-          //obj.length
-          hits.length === 0
-        ) {
+        hideLoader();
+
+        if (hits.length === 0) {
           iziToast.error({
             message:
               'Sorry, there are no images matching your search query. Please try again!',
             position: 'topRight',
             backgroundColor: ' #ef4040;',
           });
-          hideLoader();
+        } else if (
+          document.querySelector("input[name='search-text']").value !== ''
+        ) {
+          iziToast.error({
+            message: 'Sorry, input is empty!',
+            position: 'topRight',
+            backgroundColor: ' #ef4040;',
+          });
+        } else {
+          // hideLoader();
+          createGallery(hits);
+          // lightbox.refresh();}
         }
-        return hits; //obj
       })
       .catch(error => {
         iziToast.error({
@@ -64,21 +71,6 @@ form.addEventListener('submit', e => {
           position: 'topRight',
           backgroundColor: ' #ef4040;',
         });
-        hideLoader();
-      })
-      .then(hits => {
-        console.log(hits);
-        hideLoader();
-        // hideLoader();
-        createGallery(hits);
-        // lightbox.refresh();
       });
-  } else {
-    return iziToast.error({
-      message: 'Sorry, input is empty!',
-      position: 'topRight',
-      backgroundColor: ' #ef4040;',
-    });
-    hideLoader();
   }
 });

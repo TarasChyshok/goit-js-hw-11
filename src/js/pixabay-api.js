@@ -19,7 +19,6 @@ export function getImagesByQuery(query) {
     //   Content-Type: "application/json",
     // },
   }).then(response => {
-    console.log(response.data.hits);
     return response.data.hits;
   });
 }

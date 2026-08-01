@@ -3,7 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export const lightbox = new SimpleLightbox('.a-item', {
+export const lightbox = new SimpleLightbox('a.a-item', {
   nav: true,
   captions: true,
   captionsData: 'alt',
@@ -18,7 +18,6 @@ export const lightbox = new SimpleLightbox('.a-item', {
 export function createGallery(images) {
   //problem
   //ul-(for-li-img)-insertAdj(ul)
-  console.log(images);
   const galleryMarkup = images.map(element => {
     return `<li class="item-gallery">
                 <a href="${element.largeImageURL}" class="a-item">
@@ -38,7 +37,6 @@ export function createGallery(images) {
 
   const galleryUl = document.querySelector('ul.gallery');
   galleryUl.insertAdjacentHTML('afterbegin', galleryMarkup.join(''));
-  console.log(galleryMarkup);
   //simplelightb =new spml('a.gal', {})  simpleLightb.refresh();
   lightbox.refresh();
 }
@@ -52,11 +50,18 @@ export function showLoader() {
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
   const span = document.querySelector('span.loader');
+  if (!span) {
+    span = document.createElement('span');
+    span.classList.add('loader');
+    document.querySelector('form').insertAdjacentHTML('afterend', span);
+  }
   span.classList.add('showLoader');
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
   const span = document.querySelector('span.loader');
-  span.classList.remove('showLoader');
+  if (span) {
+    span.classList.remove('showLoader');
+  }
 }
 //splghtbx
