@@ -40,9 +40,6 @@
   }
 }
 
-.hideLoader {
-  display: none;
-}
 .showLoader {
   display: block;
 }

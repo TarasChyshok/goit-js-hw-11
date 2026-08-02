@@ -29,7 +29,7 @@ export function createGallery(images) {
                 <ul class='info'>
                   <li>Likes <span class='info-span'>${element.likes}</span></li>
                   <li>Views <span class="info-span">${element.views}</span></li>
-                  <li>Comments <span class="info-span">${element.comments}</span>
+                  <li>Comments <span class="info-span">${element.comments}</span></li>
                   <li>Downloads <span class="info-span">${element.downloads}</span></li>
                 </ul>
               </li>`;
@@ -46,22 +46,27 @@ export function clearGallery() {
     galleryUl.innerHTML = '';
   }
 }
-
 export function showLoader() {
   // document
   //   .querySelector('form')
   //   .insertAdjacentHTML('afterend', '<span class="loader"></span>');
-  if (!span) {
-    let spanCrEl = "<span class='loader'></span>";
-    document.querySelector('form').insertAdjacentHTML('afterend', spanCrEl);
-  }
   const span = document.querySelector('span.loader');
+  if (!span) {
+    let spanCrEl = "<span class='loader showLoader'></span>";
+    document.querySelector('form').insertAdjacentHTML('afterend', spanCrEl);
+  } else if (span) {
+    span.classList.add('showLoader');
+  } else {
+    return;
+  }
 }
 export function hideLoader() {
   // document.querySelector('form').insertAdjacentHTML('afterend', '');
-  if (span) {
-    const span = document.querySelector('span.loader');
+  const span = document.querySelector('span.loader');
+  if (span && span.classList.contains('showLoader')) {
     span.classList.remove('showLoader');
+  } else if (!span) {
+    return;
   }
 }
 //splghtbx

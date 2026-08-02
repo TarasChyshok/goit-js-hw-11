@@ -1,7 +1,7 @@
 import axios from 'axios';
 export function getImagesByQuery(query) {
   //api key: 53619914-87b740f2b3a0dec47a2b3fec9
-  if (query)
+  if (query) {
     return axios({
       method: 'get',
       url: 'https://pixabay.com/api/',
@@ -22,5 +22,9 @@ export function getImagesByQuery(query) {
     }).then(response => {
       return response.data.hits;
     });
+  } else if (query.toLowerCase().trim() === '') {
+    let array = [];
+    return Promise.resolve(array);
+  }
 }
 //http functions
