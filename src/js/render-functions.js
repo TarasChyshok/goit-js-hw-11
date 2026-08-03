@@ -14,6 +14,7 @@ export const lightbox = new SimpleLightbox('ul.gallery a.a-item', {
   captionSelector: 'img',
   captionDelay: 250,
 });
+const galleryUl = document.querySelector('ul.gallery');
 
 export function createGallery(images) {
   //problem
@@ -35,14 +36,12 @@ export function createGallery(images) {
               </li>`;
   });
 
-  const galleryUl = document.querySelector('ul.gallery');
   galleryUl.insertAdjacentHTML('afterbegin', galleryMarkup.join(''));
   //simplelightb =new spml('a.gal', {})  simpleLightb.refresh();
   lightbox.refresh();
 }
 export function clearGallery() {
-  if (document.querySelector('ul.gallery')) {
-    const galleryUl = document.querySelector('ul.gallery');
+  if (galleryUl) {
     galleryUl.innerHTML = '';
   }
 }
@@ -56,8 +55,6 @@ export function showLoader() {
     document.querySelector('form').insertAdjacentHTML('afterend', spanCrEl);
   } else if (span) {
     span.classList.add('showLoader');
-  } else {
-    return;
   }
 }
 export function hideLoader() {
@@ -65,8 +62,6 @@ export function hideLoader() {
   const span = document.querySelector('span.loader');
   if (span && span.classList.contains('showLoader')) {
     span.classList.remove('showLoader');
-  } else if (!span) {
-    return;
   }
 }
 //splghtbx

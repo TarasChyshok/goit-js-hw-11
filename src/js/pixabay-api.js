@@ -22,7 +22,7 @@ export function getImagesByQuery(query) {
     }).then(response => {
       return response.data.hits;
     });
-  } else if (query.toLowerCase().trim() === '') {
+  } else if (query == false || query.trim() === '') {
     let array = [];
     return Promise.resolve(array);
   }
